@@ -1,5 +1,7 @@
 import datetime
 
+# gets week number for form
+# currently hardcoded: CHANGE IN FUTURE VERSION
 def getWeekNumber():
     start = datetime.date(2019, 8, 26)
     week = datetime.timedelta(weeks = 1)
@@ -9,5 +11,3 @@ def getWeekNumber():
     for i in range(1, 17):
         if delta < week * i:
             return i - 1
-
-print(getWeekNumber())
