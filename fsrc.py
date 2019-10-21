@@ -103,7 +103,7 @@ listener.start()
 # keep program running
 # later on will implement menu system here with more options such as recovering data
 while True:
-    choice = input('')
+    choice = input('>> ')
     if choice == 'new':
         recordEntry()
     if choice == 'users':
