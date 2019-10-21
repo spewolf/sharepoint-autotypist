@@ -86,7 +86,6 @@ def writeEntry(index = -1):
         print('ERROR: No entries exist')
         return
     enterFSRC(entries[index])
-    print("Entry Written")
 
 def on_release(key):
     # listener writes data if F2 is pressed
@@ -107,5 +106,7 @@ while True:
     choice = input('')
     if choice == 'new':
         recordEntry()
+    if choice == 'users':
+        residents.printAll()
     elif choice == 'exit':
         break;
