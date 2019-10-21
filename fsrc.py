@@ -40,7 +40,8 @@ def recordEntry():
         username = input('BGSU Username?\n>> ').split('@')[0]
         resident = residents.getResident(username)
         if not resident:
-            print('Resident does not exist, check residents.csv')
+            residents.printAll()
+            print('\nResident does not exist, see list above\n')
         else:
             found = True
 

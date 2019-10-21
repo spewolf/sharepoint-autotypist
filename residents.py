@@ -22,5 +22,6 @@ def getUsername(resident):
 
 def printAll():
     residents = getAll()
+    residents.sort(key=lambda resident: resident['firstname']);
     for i in range(len(residents)):
         print("{} {}".format(residents[i]['firstname'], residents[i]['email']))
