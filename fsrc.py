@@ -32,19 +32,20 @@ enterFSRC = form_template(
     text_field('notes')
 )
 
-# records entry of a new interaction
-def recordEntry():
+def findResident():
     #check that user exists
-    found = False
-    while not found:
-        username = input('BGSU Username?\n>> ').split('@')[0]
-        resident = residents.getResident(username)
-        if not resident:
-            residents.printAll()
-            print('\nResident does not exist, see list above\n')
-        else:
-            found = True
+    username = input('BGSU Username?\n>> ').split('@')[0]
+    resident = residents.getResident(username)
+    if not resident:
+        residents.printAll()
+        print('\nResident does not exist, see list above\n')
+        return findResident()
+    return resident
 
+# records entry of a new interaction
+def recordEntry(resident):
+    if resident == None:
+        return None
     # record basic questions
     successes = [askSuccess() for i in range(2)]
     challenges = [askChallenge() for i in range(2)]
@@ -111,3 +112,4 @@ while True:
         residents.printAll()
     elif choice == 'exit':
         break;
+    recordEntry(residents.getResident(choice))
