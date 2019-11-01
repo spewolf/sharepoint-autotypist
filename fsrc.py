@@ -63,7 +63,7 @@ def recordEntry(resident):
         "week"       : smartfill.getWeekNumber(),
         "building"   : 0,
         "room"       : resident['room'],
-        "username"   : username,
+        "username"   : residents.getUsername(resident),
         "firstname"  : resident['firstname'],
         "lastname"   : resident['lastname'],
         "success_first"    : successes[0],
@@ -106,10 +106,18 @@ listener.start()
 # later on will implement menu system here with more options such as recovering data
 while True:
     choice = input('>> ')
+    if len(choice) < 1:
+        continue
+
+    # Start new report
     if choice == 'new':
-        recordEntry()
+        recordEntry(findResident())
+    # Print out all of the users
     if choice == 'users':
         residents.printAll()
+    # Leave program
     elif choice == 'exit':
         break;
+    # See if username of a resident was entered and 
+    # start new report from that point if it was
     recordEntry(residents.getResident(choice))
