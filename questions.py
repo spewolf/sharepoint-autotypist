@@ -62,8 +62,8 @@ def askChallengeQuestion():
 
 resources = [
     'None',
-    'BGSU Police',
     'Academic Advisor',
+    'BGSU Police',
     'Bursars Office',
     'Campus Activities',
     'Campus Operations',
