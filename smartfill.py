@@ -3,7 +3,7 @@ import datetime
 # gets week number for form
 # currently hardcoded: CHANGE IN FUTURE VERSION
 def getWeekNumber():
-    start = datetime.date(2019, 8, 26)
+    start = datetime.date(2020, 1, 27)
     week = datetime.timedelta(weeks = 1)
     delta = datetime.date.today() - start
 
