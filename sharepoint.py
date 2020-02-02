@@ -13,6 +13,7 @@ def form_template(*args):
     def type_form_entries(data):
         for name, typer in args:
             typer(data[name])
+        reset_form()
     return type_form_entries
 
 def text_field(name):
@@ -60,3 +61,21 @@ def multiplechoice_field(name, initial_state = 0):
         controller.release(Key.tab)
     # name is used to pull data from given dictionary which is then entered by select_choice
     return (name, select_choice)
+
+def reset_form():
+    controller = Controller()
+    time.sleep(DELAY * 100);
+
+    # add delay HERE
+    controller.press(Key.enter)
+    controller.release(Key.enter)
+    time.sleep(DELAY * 400)
+
+    controller.press(Key.enter)
+    controller.release(Key.enter)
+    time.sleep(DELAY * 150)
+    
+    for i in range(2):
+        controller.press(Key.tab)
+        controller.release(Key.tab)
+        time.sleep(DELAY * 10)

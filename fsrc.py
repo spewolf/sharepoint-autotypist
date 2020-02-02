@@ -60,7 +60,7 @@ def recordEntry(resident):
     # creates dictionary to be passed to enterFSRC() when entering data
     record = {
         "title"      : "Spencer Wolf - Intentional Interaction",
-        "week"       : smartfill.getWeekNumber(),
+        "week"       : 1 + smartfill.getWeekNumber(),
         "building"   : 1,
         "room"       : resident['room'],
         "username"   : residents.getUsername(resident),
