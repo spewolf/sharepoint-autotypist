@@ -6,7 +6,7 @@ from questions import *
 import residents
 import smartfill
 
-entries = []
+entries = [{'title': 'Spencer Wolf - Intentional Interaction', 'week': 5, 'building': 1, 'room': 'KRED 0416-2', 'username': 'rpalma', 'firstname': 'Ryan', 'lastname': 'Palma', 'success_first': 3, 'success_second': 4, 'challenge_first': 2, 'challenge_second': 3, 'interaction_type': 0, 'number_participants': '1', 'group_participants': '', 'flagQ': 1, 'challengeQ': 1, 'resource': 3, 'advice': '', 'notes': 'He is a test'}]
 userKeyboard = Controller()
 
 # describes form so that dictionary can be passed to type in data

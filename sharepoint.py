@@ -5,7 +5,8 @@ from pynput.keyboard import Key, Controller
 import time
 
 #Delay insures that the browser processes all keypresses
-DELAY = 0.01
+DELAY = 0.05
+# was at .015
 
 def form_template(*args):
     # Returns function that takes data based on args and types it
@@ -13,7 +14,7 @@ def form_template(*args):
     def type_form_entries(data):
         for name, typer in args:
             typer(data[name])
-        reset_form()
+        #reset_form()
     return type_form_entries
 
 def text_field(name):
@@ -69,7 +70,7 @@ def reset_form():
     # add delay HERE
     controller.press(Key.enter)
     controller.release(Key.enter)
-    time.sleep(DELAY * 400)
+    time.sleep(DELAY * 150)
 
     controller.press(Key.enter)
     controller.release(Key.enter)
