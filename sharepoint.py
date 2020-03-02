@@ -5,15 +5,17 @@ from pynput.keyboard import Key, Controller
 import time
 
 #Delay insures that the browser processes all keypresses
-DELAY = 0.05
+DELAY = 0.03
+controller = Controller()
 # was at .015
 
 def form_template(*args):
     # Returns function that takes data based on args and types it
     # works by chaining text_fields and multiplechoice_fields then looping them over given data
     def type_form_entries(data):
+        set_head()
         for name, typer in args:
-            typer(data[name])
+            typer(data[name]) if name != "" else typer()
         #reset_form()
     return type_form_entries
 
@@ -24,12 +26,8 @@ def text_field(name):
             print("ERROR: {0} is not a string".format(text))
             raise ValueError()
         # keypresses to type text into field
-        controller = Controller()
-        time.sleep(DELAY)
-        controller.type(text)
-        time.sleep(DELAY)
-        controller.press(Key.tab)
-        controller.release(Key.tab)
+        hit_str(text)
+        hit(Key.tab)
     # name is used to pull data from given dictionary which is then entered by type_text_entry
     return (name, type_text_entry)
 
@@ -44,27 +42,30 @@ def multiplechoice_field(name, initial_state = 0):
         if not isinstance(choice_index, int):
             print("ERROR: {0} is not an int".format(choice_index))
             raise ValueError()
-        controller = Controller()
 
+        hit(Key.enter)
         # Moves up and down multiple choice window state can be changed if form defaults to a certain one
         while state < choice_index:
-            time.sleep(DELAY)
-            controller.press(Key.down)
-            controller.release(Key.down)
+            hit(Key.down)
             state += 1
         while state > choice_index:
-            time.sleep(DELAY)
-            controller.press(Key.up)
-            controller.release(Key.up)
+            hit(Key.up)
             state -= 1
-        time.sleep(DELAY)
-        controller.press(Key.tab)
-        controller.release(Key.tab)
+        hit(Key.enter)
+        hit(Key.tab)
     # name is used to pull data from given dictionary which is then entered by select_choice
     return (name, select_choice)
 
+def skip():
+    def hit_tab():
+        hit(Key.tab)
+    return ("", hit_tab)
+
+def set_head():
+    for i in range(3):
+        hit(Key.tab)
+
 def reset_form():
-    controller = Controller()
     time.sleep(DELAY * 100);
 
     # add delay HERE
@@ -80,3 +81,13 @@ def reset_form():
         controller.press(Key.tab)
         controller.release(Key.tab)
         time.sleep(DELAY * 10)
+
+def hit(key):
+    controller.press(key)
+    controller.release(key)
+    time.sleep(DELAY)
+
+def hit_str(text):
+    controller.type(text)
+    time.sleep(DELAY)
+

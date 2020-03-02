@@ -11,9 +11,8 @@ userKeyboard = Controller()
 
 # describes form so that dictionary can be passed to type in data
 enterFSRC = form_template(
-    text_field('title'),
     multiplechoice_field('week'),
-    multiplechoice_field('building'),
+    skip(),
     text_field('room'),
     text_field('username'),
     text_field('firstname'),
@@ -22,11 +21,10 @@ enterFSRC = form_template(
     multiplechoice_field('success_second'),
     multiplechoice_field('challenge_first'),
     multiplechoice_field('challenge_second'),
-    multiplechoice_field('interaction_type'),
-    text_field('number_participants'),
-    text_field('group_participants'),
-    multiplechoice_field('flagQ', 1),
-    multiplechoice_field('challengeQ'),
+    skip(),
+    skip(),
+    skip(),
+    skip(),
     multiplechoice_field('resource'),
     text_field('advice'),
     text_field('notes')
@@ -49,9 +47,7 @@ def recordEntry(resident):
     # record basic questions
     successes = [askSuccess() for i in range(2)]
     challenges = [askChallenge() for i in range(2)]
-    flagQ = askFlag()
     #ask only if interaction is flagged
-    challengeQ = askChallengeQuestion() if flagQ == 0 else 0
     resource = askResource()
     # ask only if advice is flagged
     advice = askAdvice() if resource == 17 else ''
@@ -59,23 +55,17 @@ def recordEntry(resident):
 
     # creates dictionary to be passed to enterFSRC() when entering data
     record = {
-        "title"      : "Spencer Wolf - Intentional Interaction",
-        "week"       : 1 + smartfill.getWeekNumber(),
+        "week"       : smartfill.getWeekNumber(),
         "building"   : 1,
         "room"       : resident['room'],
         "username"   : residents.getUsername(resident),
         "firstname"  : resident['firstname'],
         "lastname"   : resident['lastname'],
-        "success_first"    : 1 + successes[0],
-        "success_second"   : 1 + successes[1],
+        "success_first"    : successes[0],
+        "success_second"   : successes[1],
         "challenge_first"  : challenges[0],
         "challenge_second" : challenges[1],
-        "interaction_type" : 0,
-        "number_participants": '1',
-        "group_participants": '',
-        "flagQ"      : flagQ,
-        "challengeQ" : 1 + challengeQ,
-        "resource"   : 1 + resource,
+        "resource"   : resource,
         "advice"     : advice,
         "notes"      : notes
         }
@@ -93,7 +83,7 @@ def on_release(key):
     # listener writes data if F2 is pressed
     if key == Key.f2:
         writeEntry()
-    elif key == keyboard.Key.esc:
+    elif key == keyboard.Key.f3:
         # Stop listener
         return False
 
