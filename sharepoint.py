@@ -5,7 +5,7 @@ from pynput.keyboard import Key, Controller
 import time
 
 #Delay insures that the browser processes all keypresses
-DELAY = 0.03
+DELAY = 0.06
 controller = Controller()
 # was at .015
 
