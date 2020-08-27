@@ -17,7 +17,7 @@ def askSuccess():
         13. Regularly attends class
     ''')
     success = input('Success?\n>> ')
-    return 0 if not success else int(success) - 1
+    return 1 if not success else int(success)
 
 def askChallenge():
     print('''
@@ -89,7 +89,7 @@ def askResource():
     for i in range(len(resources)):
         print('{0}. {1}'.format(i + 1, resources[i]))
     resource = input('Resource?\n>> ')
-    return 0 if not resource else int(resource) - 1
+    return 0 if not resource else int(resource)
 
 def askAdvice():
     return input('Personal Advice/Experience?\n>> ')

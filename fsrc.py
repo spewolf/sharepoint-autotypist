@@ -7,10 +7,12 @@ import residents
 import smartfill
 
 userKeyboard = Controller()
+entries = []
 
 # describes form so that dictionary can be passed to type in data
 enterFSRC = form_template(
-    multiplechoice_field('week'),
+    text_field('title'), skip(),
+    skip(), #multiplechoice_field('week'),
     skip(),
     text_field('room'),
     text_field('username'),
@@ -20,10 +22,9 @@ enterFSRC = form_template(
     multiplechoice_field('success_second'),
     multiplechoice_field('challenge_first'),
     multiplechoice_field('challenge_second'),
+    skip(1), 
     skip(),
-    skip(),
-    skip(),
-    skip(),
+    skip(1),
     multiplechoice_field('resource'),
     text_field('advice'),
     text_field('notes')
@@ -41,6 +42,7 @@ def findResident():
 
 # records entry of a new interaction
 def recordEntry(resident):
+    global entries
     if resident == None:
         return None
     # record basic questions
@@ -49,11 +51,12 @@ def recordEntry(resident):
     #ask only if interaction is flagged
     resource = askResource()
     # ask only if advice is flagged
-    advice = askAdvice() if resource == 17 else ''
+    advice = askAdvice() if resource == 18 else ''
     notes = askNotes()
 
     # creates dictionary to be passed to enterFSRC() when entering data
     record = {
+        "title" : "Spencer's Interaction",
         "week"       : smartfill.getWeekNumber() - 1,
         "building"   : 1,
         "room"       : resident['room'],

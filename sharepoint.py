@@ -5,7 +5,7 @@ from pynput.keyboard import Key, Controller
 import time
 
 #Delay insures that the browser processes all keypresses
-DELAY = 0.06
+DELAY = 0.16
 controller = Controller()
 # was at .015
 
@@ -13,7 +13,7 @@ def form_template(*args):
     # Returns function that takes data based on args and types it
     # works by chaining text_fields and multiplechoice_fields then looping them over given data
     def type_form_entries(data):
-        set_head()
+#        set_head()
         for name, typer in args:
             typer(data[name]) if name != "" else typer()
         #reset_form()
@@ -56,8 +56,10 @@ def multiplechoice_field(name, initial_state = 0):
     # name is used to pull data from given dictionary which is then entered by select_choice
     return (name, select_choice)
 
-def skip():
+def skip(jump = 0):
     def hit_tab():
+        for i in range(jump):
+            hit(Key.down)
         hit(Key.tab)
     return ("", hit_tab)
 
